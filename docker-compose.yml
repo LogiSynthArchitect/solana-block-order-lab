@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  solana-block-order-lab:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: solana-block-order-lab
+    environment:
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - SOLANA_DRY_RUN=${SOLANA_DRY_RUN:-true}
+      - SOLANA_SPEND_CAP_SOL=${SOLANA_SPEND_CAP_SOL:-0.05}
+      - SOLANA_OUTPUT_DIR=/app/data
+    volumes:
+      - ./data:/app/data
+    command: ["analyze"]
